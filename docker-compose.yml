@@ -1,0 +1,18 @@
+name: analytics-engineering-with-llm
+
+services:
+  db_source:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: analytics-engineering-with-llm:dev
+    container_name: postgres_db
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
